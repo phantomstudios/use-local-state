@@ -9,11 +9,11 @@ about: "Is something not working as you expect?"
 
 e.g. "Data refuses to load when accessing via https..."
 
-> Which version of PACKAGE-NAME are you using?
+> Which version of use-local-state are you using?
 
 e.g. `0.1.0`
 
-> What version of React are you using PACKAGE-NAME within?
+> What version of React are you using use-local-state within?
 
 e.g. `16.9.0`
 
@@ -31,8 +31,8 @@ e.g. "The request just hung, no response."
 
 <!--
 Before posting, please check that the bug hasn't already been:
-1. fixed in the next release (https://github.com/phantomstudios/PACKAGE-NAME/blob/master/CHANGELOG.md)
-2. discussed previously (https://github.com/phantomstudios/PACKAGE-NAME/search)
+1. fixed in the next release (https://github.com/phantomstudios/use-local-state/blob/master/CHANGELOG.md)
+2. discussed previously (https://github.com/phantomstudios/use-local-state/search)
 -->
 
 <!--

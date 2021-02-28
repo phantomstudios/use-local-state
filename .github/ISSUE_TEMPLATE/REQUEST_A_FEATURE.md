@@ -15,8 +15,8 @@ e.g. "A new input argument that accepts..."
 
 <!--
 Before posting, please check that the feature hasn't already been:
-1. added in the next release (https://github.com/phantomstudios/PACKAGE-NAME/blob/master/CHANGELOG.md)
-2. discussed previously (https://github.com/phantomstudios/PACKAGE-NAME/search)
+1. added in the next release (https://github.com/phantomstudios/use-local-state/blob/master/CHANGELOG.md)
+2. discussed previously (https://github.com/phantomstudios/use-local-state/search)
 -->
 
 <!--

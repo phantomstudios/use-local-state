@@ -1,16 +1,16 @@
 {
-  "name": "@phntms/PACKAGE-NAME",
+  "name": "@phntms/use-local-state",
   "description": "Description, same as overview one-liner from README.md.",
   "version": "0.0.1",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "homepage": "https://github.com/phantomstudios/PACKAGE-NAME#readme",
+  "homepage": "https://github.com/phantomstudios/use-local-state#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/phantomstudios/PACKAGE-NAME.git"
+    "url": "https://github.com/phantomstudios/use-local-state.git"
   },
   "bugs": {
-    "url": "https://github.com/phantomstudios/PACKAGE-NAME/issues"
+    "url": "https://github.com/phantomstudios/use-local-state/issues"
   },
   "keywords": [
     "react",
