@@ -8,7 +8,7 @@ beforeEach(() => {
 });
 
 describe("useLocalState()", () => {
-  it("uses initial value as string", async () => {
+  it("stores initial value as string", async () => {
     const key = "key";
     const value = "something";
     const { result } = renderHook(() => useLocalState(key, value));
@@ -17,7 +17,7 @@ describe("useLocalState()", () => {
     expect(values).toEqual(value);
   });
 
-  it(`initial value isn't written into localStorage`, async () => {
+  it(`initial value isn't stored into localStorage`, async () => {
     if (!SUPPORTED) return;
 
     const key = "key";
@@ -27,7 +27,7 @@ describe("useLocalState()", () => {
     expect(localStorage.getItem(key)).toEqual(null);
   });
 
-  it("uses initial value as boolean", async () => {
+  it("stores initial value as boolean", async () => {
     const key = "key";
     const value = false;
     const { result } = renderHook(() => useLocalState(key, value));
@@ -36,7 +36,7 @@ describe("useLocalState()", () => {
     expect(values).toEqual(value);
   });
 
-  it("uses initial value as object", async () => {
+  it("stores initial value as object", async () => {
     const key = "key";
     const value = {
       something: "else",
@@ -47,7 +47,7 @@ describe("useLocalState()", () => {
     expect(values).toEqual(value);
   });
 
-  it("uses initial value as array", async () => {
+  it("stores initial value as array", async () => {
     const key = "todos";
     const values = ["first", "second"];
     const { result } = renderHook(() => useLocalState(key, values));
@@ -102,7 +102,7 @@ describe("useLocalState()", () => {
     expect(values).toEqual(newValue);
   });
 
-  it("can update value as list", async () => {
+  it("can update value as array", async () => {
     const key = "todos";
     const values = ["first", "second"];
     const { result } = renderHook(() => useLocalState(key, values));
@@ -158,7 +158,8 @@ describe("useLocalState()", () => {
 
     localStorage.setItem(key, JSON.stringify(values));
 
-    const { result } = renderHook(() => useLocalState(key, values));
+    const newValues = ["third", "fourth"];
+    const { result } = renderHook(() => useLocalState(key, newValues));
 
     const [todos] = result.current;
     expect(todos).toEqual(values);
