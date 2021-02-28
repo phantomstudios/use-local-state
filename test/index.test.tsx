@@ -119,21 +119,21 @@ describe("useLocalState()", () => {
   });
 
   // todo(): this logic could be super handy...
-  // it("updates state with callback function", () => {
-  //   const key = "todos";
-  //   const values = ["first", "second"];
-  //   const { result } = renderHook(() => useLocalState(key, values));
+  it("updates state with callback function", () => {
+    const key = "todos";
+    const values = ["first", "second"];
+    const { result } = renderHook(() => useLocalState(key, values));
 
-  //   const newValues = ["first", "second"];
-  //   act(() => {
-  //     const setTodos = result.current[1];
+    const newValues = ["first", "second"];
+    act(() => {
+      const setTodos = result.current[1];
 
-  //     setTodos((current) => [...current, ...newValues]);
-  //   });
+      setTodos((current) => [...current, ...newValues]);
+    });
 
-  //   const [todos] = result.current;
-  //   expect(todos).toEqual([...values, ...newValues]);
-  // });
+    const [todos] = result.current;
+    expect(todos).toEqual([...values, ...newValues]);
+  });
 
   it("does not fail even if invalid data is stored into localStorage", async () => {
     if (!SUPPORTED) return;
@@ -163,24 +163,6 @@ describe("useLocalState()", () => {
 
     const [todos] = result.current;
     expect(todos).toEqual(values);
-  });
-
-  it("throws an error on two states with the same key", async () => {
-    const consoleError = console.error;
-    console.error = () => null;
-
-    const key = "todos";
-    const valuesA = ["first", "second"];
-    const valuesB = ["third", "fourth"];
-
-    expect(() => {
-      renderHook(() => {
-        useLocalState(key, valuesA);
-        useLocalState(key, valuesB);
-      });
-    }).toThrow();
-
-    console.error = consoleError;
   });
 
   it("does not throw an error with two states with different keys", async () => {
