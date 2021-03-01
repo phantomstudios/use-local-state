@@ -7,7 +7,7 @@ about: "Is something not working as you expect?"
 
 > Clearly describe the bug
 
-e.g. "Data refuses to load when accessing via https..."
+e.g. "Data does not persist upon refresh."
 
 > Which version of use-local-state are you using?
 
@@ -19,23 +19,19 @@ e.g. `16.9.0`
 
 > What build/platform are you using?
 
-e.g. "Gatsby"
+e.g. "Next.js 10"
 
 > What did you expect to happen?
 
-e.g. "Data to load."
+e.g. "Updated value to be persisted."
 
 > What actually happened (e.g. what warnings or errors did you get)?
 
-e.g. "The request just hung, no response."
+e.g. "Hook always returns default state."
 
 <!--
-Before posting, please check that the bug hasn't already been:
-1. fixed in the next release (https://github.com/phantomstudios/use-local-state/blob/master/CHANGELOG.md)
-2. discussed previously (https://github.com/phantomstudios/use-local-state/search)
--->
+Before posting, please check that the bug hasn't already been discussed previously (https://github.com/phantomstudios/use-local-state/search)
 
-<!--
 You can help us fix the bug more quickly by:
 1. Figuring out what needs to be done and proposing it
 2. Submitting a PR with failing tests.

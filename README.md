@@ -26,7 +26,7 @@ npm i @phntms/use-local-state
 
 ## Usage
 
-Store a boolean to track if a user has detected terms of use.
+Store a boolean to track if a user has accepted terms of use.
 
 ```JSX
 import React from 'react';
