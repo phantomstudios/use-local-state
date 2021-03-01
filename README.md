@@ -26,13 +26,13 @@ npm i @phntms/use-local-state
 
 ## Usage
 
-Store a boolean to track if a user has detected terms of use.
+Store a boolean to track if a user has accepted terms of use.
 
 ```JSX
 import React from 'react';
 import useLocalState from '@phntms/use-local-state';
 
-const SomeExample = () = {
+const TermsExample = () = {
   const [accepted, setAccepted] = useLocalState("TERMS_ACCEPTED", false);
 
   return (
@@ -58,11 +58,10 @@ interface Bookmark {
   url: string;
 }
 
-const SomeExample2 = () = {
+const BookmarkExample = () = {
   const [bookmarks, setBookmarks] = useLocalState<Bookmark[]>("BOOKMARKS", []);
 
   const addBookmark = (bookmark: Bookmark) => setBookmarks([...bookmarks, bookmark]);
-
 
   return (
     <>
@@ -84,8 +83,8 @@ const SomeExample2 = () = {
 
 ### Input
 
-- `key` : Required - The key to store within `LocalStorage`.
-- `initialValue` : Required - The default/initial value if the key is not found within the `LocalStorage` object.
+- `key` : Required - The key of type `string` to store within `LocalStorage`.
+- `initialValue` : Required - The default/initial value of type `T` if the key is not found within the `LocalStorage` object.
 
 ### Output
 

@@ -1,7 +1,7 @@
 {
   "name": "@phntms/use-local-state",
   "description": "A simple React hook that allows you to store data within LocalStorage with the same interface as the standard React.useState hook.",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "homepage": "https://github.com/phantomstudios/use-local-state#readme",
@@ -42,19 +42,19 @@
     "react": "^16.8.0"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.4.5",
-    "@babel/preset-typescript": "^7.3.3",
+    "@babel/preset-env": "^7.13.8",
+    "@babel/preset-typescript": "^7.13.0",
     "@testing-library/react": "^11.2.5",
-    "@testing-library/react-hooks": "^5.0.3",
+    "@testing-library/react-hooks": "^5.1.0",
     "@types/jest": "^26.0.20",
     "@types/react": "^16.8.0",
-    "@typescript-eslint/eslint-plugin": "^4.15.2",
-    "@typescript-eslint/parser": "^4.15.2",
+    "@typescript-eslint/eslint-plugin": "^4.16.1",
+    "@typescript-eslint/parser": "^4.16.1",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.0.1",
     "browser-env": "^3.2.6",
-    "eslint": "^7.20.0",
-    "eslint-config-prettier": "^8.0.0",
+    "eslint": "^7.21.0",
+    "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.22.0",
@@ -65,8 +65,8 @@
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
     "react-test-renderer": "^16.8.0",
-    "ts-jest": "^26.1.0",
-    "typescript": "^4.1.5"
+    "ts-jest": "^26.5.2",
+    "typescript": "^4.2.2"
   },
   "dependencies": {}
 }
