@@ -4,7 +4,7 @@
 [![Actions Status][ci-image]][ci-url]
 [![PR Welcome][npm-downloads-image]][npm-downloads-url]
 
-A simple react hook that allows you to store data within `LocalStorage` with same interface as the standard `React.useState` hook.
+A simple React hook that allows you to store data within `LocalStorage` with the same interface as the standard `React.useState` hook.
 
 ## Introduction
 
@@ -89,7 +89,7 @@ const SomeExample2 = () = {
 
 ### Output
 
-An array containing the value and a function to set the value. Signiature is exactly like the standard [React.useState](https://reactjs.org/docs/hooks-state.html) hook.
+An array containing the value and a function to set the value. Signature is exactly like the standard [React.useState](https://reactjs.org/docs/hooks-state.html) hook.
 
 [npm-image]: https://img.shields.io/npm/v/@phntms/use-local-state.svg?style=flat-square&logo=react
 [npm-url]: https://npmjs.org/package/@phntms/use-local-state
