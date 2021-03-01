@@ -32,7 +32,7 @@ Store a boolean to track if a user has accepted terms of use.
 import React from 'react';
 import useLocalState from '@phntms/use-local-state';
 
-const SomeExample = () = {
+const TermsExample = () = {
   const [accepted, setAccepted] = useLocalState("TERMS_ACCEPTED", false);
 
   return (
@@ -58,11 +58,10 @@ interface Bookmark {
   url: string;
 }
 
-const SomeExample2 = () = {
+const BookmarkExample = () = {
   const [bookmarks, setBookmarks] = useLocalState<Bookmark[]>("BOOKMARKS", []);
 
   const addBookmark = (bookmark: Bookmark) => setBookmarks([...bookmarks, bookmark]);
-
 
   return (
     <>
