@@ -83,8 +83,8 @@ const BookmarkExample = () = {
 
 ### Input
 
-- `key` : Required - The key to store within `LocalStorage`.
-- `initialValue` : Required - The default/initial value if the key is not found within the `LocalStorage` object.
+- `key` : Required - The key of type `string` to store within `LocalStorage`.
+- `initialValue` : Required - The default/initial value of type `T` if the key is not found within the `LocalStorage` object.
 
 ### Output
 
