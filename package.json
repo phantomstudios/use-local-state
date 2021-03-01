@@ -1,6 +1,6 @@
 {
   "name": "@phntms/use-local-state",
-  "description": "Description, same as overview one-liner from README.md.",
+  "description": "A simple react hook that allows you to store data within LocalStorage with same interface as the standard React.useState hook.",
   "version": "0.0.1",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -16,7 +16,9 @@
     "react",
     "hooks",
     "hook",
-    "react-hook"
+    "react-hook",
+    "localstorage",
+    "state"
   ],
   "scripts": {
     "build": "tsc",
