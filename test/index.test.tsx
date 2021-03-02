@@ -56,7 +56,7 @@ describe("useLocalState()", () => {
     expect(todos).toEqual(values);
   });
 
-  it("accepts callback as a value", async () => {
+  it("accepts callback as an initial value", async () => {
     const key = "todos";
     const values = ["first", "second"];
     const callback = () => values;
@@ -66,12 +66,32 @@ describe("useLocalState()", () => {
     expect(todos).toEqual(values);
   });
 
+  it("accepts callback as a initial value and can be updated", async () => {
+    const key = "todos";
+    const values = ["first", "second"];
+    const callback = () => values;
+    const { result } = renderHook(() => useLocalState(key, callback));
+
+    const [initialValues] = result.current;
+    expect(initialValues).toEqual(values);
+
+    const newValue = ["third", "fourth"];
+    act(() => {
+      const setValue = result.current[1];
+      setValue(newValue);
+    });
+
+    const [changedValues] = result.current;
+    expect(changedValues).toEqual(newValue);
+  });
+
   it("can update value as string", async () => {
     const key = "key";
     const value = "something";
-
     const { result } = renderHook(() => useLocalState(key, value));
-    expect(result.current[0]).toEqual(value);
+
+    const [initialValue] = result.current;
+    expect(initialValue).toEqual(value);
 
     const newValue = "something else";
     act(() => {
@@ -87,9 +107,10 @@ describe("useLocalState()", () => {
   it("can update value as object", async () => {
     const key = "key";
     const value = { something: "something" };
-
     const { result } = renderHook(() => useLocalState(key, value));
-    expect(result.current[0]).toEqual(value);
+
+    const [initialValue] = result.current;
+    expect(initialValue).toEqual(value);
 
     const newValue = { something: "else" };
     act(() => {
@@ -118,8 +139,7 @@ describe("useLocalState()", () => {
     expect(todos).toEqual(newValues);
   });
 
-  // todo(): this logic could be super handy...
-  it("updates state with callback function", () => {
+  it("updates state with callback function", async () => {
     const key = "todos";
     const values = ["first", "second"];
     const { result } = renderHook(() => useLocalState(key, values));
@@ -182,7 +202,6 @@ describe("useLocalState()", () => {
   it("can handle `undefined` values", async () => {
     const key = "todos";
     const values = ["first", "second"];
-
     const { result } = renderHook(() =>
       useLocalState<string[] | undefined>(key, values)
     );
@@ -199,7 +218,6 @@ describe("useLocalState()", () => {
   it("can handle `null` values", async () => {
     const key = "todos";
     const values = ["first", "second"];
-
     const { result } = renderHook(() =>
       useLocalState<string[] | null>(key, values)
     );
@@ -211,5 +229,62 @@ describe("useLocalState()", () => {
 
     const [value] = result.current;
     expect(value).toBe(null);
+  });
+
+  it("can reset to default value", async () => {
+    if (!SUPPORTED) return;
+
+    const key = "key";
+    const value = "something";
+    const { result } = renderHook(() => useLocalState(key, value));
+
+    const [initialValue] = result.current;
+    expect(initialValue).toEqual(value);
+
+    const newValue = "something else";
+    act(() => {
+      const setValue = result.current[1];
+      setValue(newValue);
+    });
+
+    const [changedValue] = result.current;
+    expect(changedValue).toEqual(newValue);
+
+    act(() => {
+      const resetValue = result.current[2];
+      resetValue();
+    });
+
+    const [resetValue] = result.current;
+    expect(resetValue).toEqual(value);
+    expect(localStorage.getItem(key)).toEqual(null);
+  });
+
+  it("can reset to default value as callback", async () => {
+    const key = "todos";
+    const values = ["first", "second"];
+    const callback = () => values;
+    const { result } = renderHook(() => useLocalState(key, callback));
+
+    const [initialValues] = result.current;
+    expect(initialValues).toEqual(values);
+
+    const newValues = ["third", "fourth"];
+    act(() => {
+      const setValues = result.current[1];
+      setValues(newValues);
+    });
+
+    const [changedValues] = result.current;
+    expect(changedValues).toEqual(newValues);
+
+    act(() => {
+      const resetValues = result.current[2];
+      resetValues();
+    });
+
+    const [resetValues] = result.current;
+    expect(resetValues).toEqual(values);
+    expect(localStorage.getItem(key)).toEqual(null);
   });
 });

@@ -13,7 +13,7 @@ Just swap out your `useState` calls with `useLocalState` to persist the data bet
 ```javascript
 import useLocalState from "@phntms/use-local-state";
 
-const [token, setToken] = useLocalState("USER_TOKEN", "");
+const [value, setValue, resetValue] = useLocalState("KEY", "");
 ```
 
 ## Installation
@@ -59,7 +59,7 @@ interface Bookmark {
 }
 
 const BookmarkExample = () = {
-  const [bookmarks, setBookmarks] = useLocalState<Bookmark[]>("BOOKMARKS", []);
+  const [bookmarks, setBookmarks, clearBookmarks] = useLocalState<Bookmark[]>("BOOKMARKS", []);
 
   const addBookmark = (bookmark: Bookmark) => setBookmarks([...bookmarks, bookmark]);
 
@@ -67,6 +67,7 @@ const BookmarkExample = () = {
     <>
       <h1>Bookmarks</h2>
       <NewBookmark add={addBookmark} />
+      <button onClick={clearBookmarks}>Clear Bookmarks</button>
       <ul>
         {bookmarks.map(((bookmark, i) => (
           <li key={i}>
@@ -88,7 +89,11 @@ const BookmarkExample = () = {
 
 ### Output
 
-An array containing the value and a function to set the value. Signature is exactly like the standard [React.useState](https://reactjs.org/docs/hooks-state.html) hook.
+An array containing the value, a function to set the value and another function to reset the value.
+
+- `[0]` : The value of the data stored in LocalStorage or the defaultValue if not set.
+- `[1]` : A function to set the value stored in LocalStorage. Signature is exactly like the standard [React.useState](https://reactjs.org/docs/hooks-state.html) hook.
+- `[2]` : A function to reset the data stored in the LocalStorage.
 
 [npm-image]: https://img.shields.io/npm/v/@phntms/use-local-state.svg?style=flat-square&logo=react
 [npm-url]: https://npmjs.org/package/@phntms/use-local-state

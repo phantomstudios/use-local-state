@@ -2,13 +2,17 @@ import { useState } from "react";
 
 import { SUPPORTED } from "./utils";
 
-const useLocalState = <T>(
+type Dispatch<A> = (value: A) => void;
+type SetStateAction<S> = S | ((prevState: S) => S);
+
+const useLocalState = <S>(
   key: string,
-  defaultValue: T
-): [T, (v: T | ((v: T) => T)) => void] => {
-  const [value, setValue] = useState<T>(() => {
-    const toStore =
-      typeof defaultValue === "function" ? defaultValue() : defaultValue;
+  defaultValue: S | (() => S)
+): [S, Dispatch<SetStateAction<S>>, () => void] => {
+  const [value, setValue] = useState<S>(() => {
+    const isCallable = (value: unknown): value is () => S =>
+      typeof value === "function";
+    const toStore = isCallable(defaultValue) ? defaultValue() : defaultValue;
     if (!SUPPORTED) return toStore;
     const item = window.localStorage.getItem(key);
     try {
@@ -18,15 +22,23 @@ const useLocalState = <T>(
     }
   });
 
-  const setLocalStateValue = (newValue: T | ((v: T) => T)) => {
-    const isCallable = (value: unknown): value is (v: T) => T =>
+  const setLocalStateValue = (newValue: SetStateAction<S>) => {
+    const isCallable = (value: unknown): value is (prevState: S) => S =>
       typeof value === "function";
     const toStore = isCallable(newValue) ? newValue(value) : newValue;
     if (SUPPORTED) window.localStorage.setItem(key, JSON.stringify(toStore));
     setValue(toStore);
   };
 
-  return [value, setLocalStateValue];
+  const reset = () => {
+    const isCallable = (value: unknown): value is (prevState: S) => S =>
+      typeof value === "function";
+    const toStore = isCallable(defaultValue) ? defaultValue() : defaultValue;
+    setValue(toStore);
+    if (SUPPORTED) window.localStorage.removeItem(key);
+  };
+
+  return [value, setLocalStateValue, reset];
 };
 
 export default useLocalState;
