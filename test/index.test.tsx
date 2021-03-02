@@ -56,7 +56,7 @@ describe("useLocalState()", () => {
     expect(todos).toEqual(values);
   });
 
-  it("accepts callback as a value", async () => {
+  it("accepts callback as an initial value", async () => {
     const key = "todos";
     const values = ["first", "second"];
     const callback = () => values;
@@ -66,7 +66,7 @@ describe("useLocalState()", () => {
     expect(todos).toEqual(values);
   });
 
-  it("accepts callback as a defaultValue and can be updated with a simple type", async () => {
+  it("accepts callback as a initial value and can be updated", async () => {
     const key = "todos";
     const values = ["first", "second"];
     const callback = () => values;
