@@ -95,8 +95,6 @@ An array containing the value, a function to set the value and another function 
 - `[1]` : A function to set the value stored in LocalStorage. Signature is exactly like the standard [React.useState](https://reactjs.org/docs/hooks-state.html) hook.
 - `[2]` : A function to reset the data stored in the LocalStorage.
 
-
-
 [npm-image]: https://img.shields.io/npm/v/@phntms/use-local-state.svg?style=flat-square&logo=react
 [npm-url]: https://npmjs.org/package/@phntms/use-local-state
 [npm-downloads-image]: https://img.shields.io/npm/dm/@phntms/use-local-state.svg
