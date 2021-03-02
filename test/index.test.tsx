@@ -118,7 +118,6 @@ describe("useLocalState()", () => {
     expect(todos).toEqual(newValues);
   });
 
-  // todo(): this logic could be super handy...
   it("updates state with callback function", () => {
     const key = "todos";
     const values = ["first", "second"];
@@ -211,5 +210,59 @@ describe("useLocalState()", () => {
 
     const [value] = result.current;
     expect(value).toBe(null);
+  });
+
+  it("can reset to default value", async () => {
+    const key = "key";
+    const value = "something";
+
+    const { result } = renderHook(() => useLocalState(key, value));
+    expect(result.current[0]).toEqual(value);
+
+    const newValue = "something else";
+    act(() => {
+      const setValue = result.current[1];
+      setValue(newValue);
+    });
+
+    const [changedValues] = result.current;
+    expect(changedValues).toEqual(newValue);
+
+    act(() => {
+      const reset = result.current[2];
+      reset();
+    });
+
+    const [values] = result.current;
+    expect(values).toEqual(value);
+
+    expect(localStorage.getItem(key)).toEqual(null);
+  });
+
+  it("can reset to default value as callback", async () => {
+    const key = "todos";
+    const values = ["first", "second"];
+    const callback = () => values;
+    const { result } = renderHook(() => useLocalState<string[]>(key, callback));
+    expect(result.current[0]).toEqual(values);
+
+    const newValue = ["third", "fourth"];
+    act(() => {
+      const setValue = result.current[1];
+      setValue(newValue);
+    });
+
+    const [changedValues] = result.current;
+    expect(changedValues).toEqual(newValue);
+
+    act(() => {
+      const reset = result.current[2];
+      reset();
+    });
+
+    const [resetValues] = result.current;
+    expect(resetValues).toEqual(values);
+
+    expect(localStorage.getItem(key)).toEqual(null);
   });
 });
