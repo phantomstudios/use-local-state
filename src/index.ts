@@ -12,9 +12,7 @@ const useLocalState = <S>(
   const [value, setValue] = useState<S>(() => {
     const isCallable = (value: unknown): value is () => S =>
       typeof value === "function";
-
     const toStore = isCallable(defaultValue) ? defaultValue() : defaultValue;
-
     if (!SUPPORTED) return toStore;
     const item = window.localStorage.getItem(key);
     try {
@@ -35,7 +33,6 @@ const useLocalState = <S>(
   const reset = () => {
     const isCallable = (value: unknown): value is (prevState: S) => S =>
       typeof value === "function";
-
     const toStore = isCallable(defaultValue) ? defaultValue() : defaultValue;
     setValue(toStore);
     if (SUPPORTED) window.localStorage.removeItem(key);
