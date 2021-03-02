@@ -66,6 +66,23 @@ describe("useLocalState()", () => {
     expect(todos).toEqual(values);
   });
 
+  it("accepts callback as a defaultValue and can be updated with a simple type", async () => {
+    const key = "todos";
+    const values = ["first", "second"];
+    const callback = () => values;
+    const { result } = renderHook(() => useLocalState(key, callback));
+    expect(result.current[0]).toEqual(values);
+
+    const newValue = ["third", "fourth"];
+    act(() => {
+      const setValue = result.current[1];
+      setValue(newValue);
+    });
+
+    const [changedValues] = result.current;
+    expect(changedValues).toEqual(newValue);
+  });
+
   it("can update value as string", async () => {
     const key = "key";
     const value = "something";
@@ -243,7 +260,7 @@ describe("useLocalState()", () => {
     const key = "todos";
     const values = ["first", "second"];
     const callback = () => values;
-    const { result } = renderHook(() => useLocalState<string[]>(key, callback));
+    const { result } = renderHook(() => useLocalState(key, callback));
     expect(result.current[0]).toEqual(values);
 
     const newValue = ["third", "fourth"];
