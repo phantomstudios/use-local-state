@@ -13,7 +13,7 @@ Just swap out your `useState` calls with `useLocalState` to persist the data bet
 ```javascript
 import useLocalState from "@phntms/use-local-state";
 
-const [value, setValue, resetValue] = useLocalState("key", "");
+const [value, setValue, resetValue] = useLocalState("KEY", "");
 ```
 
 ## Installation
