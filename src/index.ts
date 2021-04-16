@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback, useRef } from "react";
 
 import { SUPPORTED } from "./utils";
 
@@ -22,21 +22,29 @@ const useLocalState = <S>(
     }
   });
 
-  const setLocalStateValue = (newValue: SetStateAction<S>) => {
-    const isCallable = (value: unknown): value is (prevState: S) => S =>
-      typeof value === "function";
-    const toStore = isCallable(newValue) ? newValue(value) : newValue;
-    if (SUPPORTED) window.localStorage.setItem(key, JSON.stringify(toStore));
-    setValue(toStore);
-  };
+  const lastValue = useRef(value);
+  lastValue.current = value;
 
-  const reset = () => {
+  const setLocalStateValue = useCallback(
+    (newValue: SetStateAction<S>) => {
+      const isCallable = (value: unknown): value is (prevState: S) => S =>
+        typeof value === "function";
+      const toStore = isCallable(newValue)
+        ? newValue(lastValue.current)
+        : newValue;
+      if (SUPPORTED) window.localStorage.setItem(key, JSON.stringify(toStore));
+      setValue(toStore);
+    },
+    [key]
+  );
+
+  const reset = useCallback(() => {
     const isCallable = (value: unknown): value is (prevState: S) => S =>
       typeof value === "function";
     const toStore = isCallable(defaultValue) ? defaultValue() : defaultValue;
     setValue(toStore);
     if (SUPPORTED) window.localStorage.removeItem(key);
-  };
+  }, [defaultValue, key]);
 
   return [value, setLocalStateValue, reset];
 };

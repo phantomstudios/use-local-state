@@ -104,6 +104,48 @@ describe("useLocalState()", () => {
     expect(values).toEqual(newValue);
   });
 
+  it("can update value as function", async () => {
+    const key = "key";
+    const value = "something";
+    const { result } = renderHook(() => useLocalState(key, value));
+
+    const [initialValue] = result.current;
+    expect(initialValue).toEqual(value);
+
+    const newValue = " else";
+    act(() => {
+      const setValue = result.current[1];
+      setValue((v) => v + newValue);
+    });
+
+    const [values] = result.current;
+    expect(values).toEqual("something else");
+  });
+
+  it("can update value as function multiple times", async () => {
+    const key = "key";
+    const value = "something";
+    const { result } = renderHook(() => useLocalState(key, value));
+
+    const [initialValue] = result.current;
+    expect(initialValue).toEqual(value);
+
+    const newValue = " else";
+    act(() => {
+      const setValue = result.current[1];
+      setValue((v) => v + newValue);
+    });
+
+    const newValue2 = " again";
+    act(() => {
+      const setValue = result.current[1];
+      setValue((v) => v + newValue2);
+    });
+
+    const [values] = result.current;
+    expect(values).toEqual("something else again");
+  });
+
   it("can update value as object", async () => {
     const key = "key";
     const value = { something: "something" };
@@ -286,5 +328,41 @@ describe("useLocalState()", () => {
     const [resetValues] = result.current;
     expect(resetValues).toEqual(values);
     expect(localStorage.getItem(key)).toEqual(null);
+  });
+
+  it("does not change the setter when value is updated", async () => {
+    const key = "key";
+    const value = "something";
+    const { result } = renderHook(() => useLocalState(key, value));
+
+    const setterOne = result.current[1];
+
+    const newValue = "something else";
+    act(() => {
+      const setValue = result.current[1];
+      setValue(newValue);
+    });
+
+    const setterTwo = result.current[1];
+
+    expect(setterOne).toEqual(setterTwo);
+  });
+
+  it("does not change the setter when value is updated via function", async () => {
+    const key = "key";
+    const value = "something";
+    const { result } = renderHook(() => useLocalState(key, value));
+
+    const setterOne = result.current[1];
+
+    const newValue = " else";
+    act(() => {
+      const setValue = result.current[1];
+      setValue((v) => v + newValue);
+    });
+
+    const setterTwo = result.current[1];
+
+    expect(setterOne).toEqual(setterTwo);
   });
 });
