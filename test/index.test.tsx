@@ -1,10 +1,13 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import { renderHook, act } from "@testing-library/react-hooks";
 
 import useLocalState from "../src";
-import { SUPPORTED } from "../src/utils";
 
 beforeEach(() => {
-  if (SUPPORTED) localStorage.clear();
+  localStorage.clear();
 });
 
 describe("useLocalState()", () => {
@@ -18,8 +21,6 @@ describe("useLocalState()", () => {
   });
 
   it(`initial value isn't stored into localStorage`, async () => {
-    if (!SUPPORTED) return;
-
     const key = "key";
     const value = "something";
     renderHook(() => useLocalState(key, value));
@@ -198,8 +199,6 @@ describe("useLocalState()", () => {
   });
 
   it("does not fail even if invalid data is stored into localStorage", async () => {
-    if (!SUPPORTED) return;
-
     const key = "todos";
     const value = "something";
 
@@ -213,8 +212,6 @@ describe("useLocalState()", () => {
   });
 
   it("gets initial value from localStorage if there is a value", async () => {
-    if (!SUPPORTED) return;
-
     const key = "todos";
     const values = ["first", "second"];
 
@@ -274,8 +271,6 @@ describe("useLocalState()", () => {
   });
 
   it("can reset to default value", async () => {
-    if (!SUPPORTED) return;
-
     const key = "key";
     const value = "something";
     const { result } = renderHook(() => useLocalState(key, value));
