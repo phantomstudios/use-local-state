@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "commonjs",
+    "module": "node16",
+    "moduleResolution": "node16",
+    "isolatedModules": true,
     "lib": ["dom", "es2015"],
     "jsx": "react",
     "declaration": true,
