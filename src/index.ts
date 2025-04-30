@@ -7,7 +7,7 @@ type SetStateAction<S> = S | ((prevState: S) => S);
 
 const useLocalState = <S>(
   key: string,
-  defaultValue: S | (() => S)
+  defaultValue: S | (() => S),
 ): [S, Dispatch<SetStateAction<S>>, () => void] => {
   const [value, setValue] = useState<S>(() => {
     const isCallable = (value: unknown): value is () => S =>
@@ -17,7 +17,7 @@ const useLocalState = <S>(
     const item = window.localStorage.getItem(key);
     try {
       return item ? JSON.parse(item) : toStore;
-    } catch (error) {
+    } catch {
       return toStore;
     }
   });
@@ -35,7 +35,7 @@ const useLocalState = <S>(
       if (SUPPORTED) window.localStorage.setItem(key, JSON.stringify(toStore));
       setValue(toStore);
     },
-    [key]
+    [key],
   );
 
   const reset = useCallback(() => {
